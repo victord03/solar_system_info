@@ -1,4 +1,5 @@
 from data.planet_data import planets
+from logic.sorting_dicts import sort_dict_by_value_itemgetter, sort_dict_masses_lambda
 
 
 class SolarSystem:
@@ -23,3 +24,14 @@ class SolarSystem:
             self.masses[planet_name] = planets[planet_name]["mass"]
             self.distances_from_the_sun[planet_name] = planets[planet_name]["distance from the sun"]
             self.distances_from_earth[planet_name] = planets[planet_name]["distance from earth"]
+
+    def sort_self_dicts(self):
+        copy_radii = sort_dict_by_value_itemgetter(self.radii, 1)
+        copy_masses = sort_dict_masses_lambda(self.masses, 1)
+        copy_distances_from_the_sun = (sort_dict_by_value_itemgetter(self.distances_from_the_sun, 1))
+        copy_distances_from_earth = (sort_dict_by_value_itemgetter(self.distances_from_earth, 1))
+
+        self.radii = copy_radii
+        self.masses = copy_masses
+        self.distances_from_the_sun = copy_distances_from_the_sun
+        self.distances_from_earth = copy_distances_from_earth

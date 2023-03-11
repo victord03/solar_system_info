@@ -1,14 +1,21 @@
 from classes.solar_system import SolarSystem
-from ui import sorting_displays as displays_sorted
 
 
 def main():
     ss = SolarSystem()
+    ss.sort_self_dicts()
 
-    print(displays_sorted.sort_dict_by_value(ss.radii, 1))
-    print(displays_sorted.sort_dict_by_value(ss.masses, 1))
-    print(displays_sorted.sort_dict_by_value(ss.distances_from_the_sun, 1))
-    print(displays_sorted.sort_dict_by_value(ss.distances_from_earth, 1))
+    print(
+        "\n",
+        ss.radii,
+        "\n",
+        ss.masses,
+        "\n",
+        ss.distances_from_the_sun,
+        "\n",
+        ss.distances_from_earth,
+        "\n",
+    )
 
 
 if __name__ == "__main__":
