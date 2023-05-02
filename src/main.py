@@ -5,7 +5,9 @@ def main():
     ss = SolarSystem()
     ss.sort_self_dicts()
 
-    print(ss.dist_from_sun)
+    print(ss.radii)
+    mercury = ss.planets["Venus"]
+    print(mercury.give_trivia(ss.planets["Earth"]))
 
 
 if __name__ == "__main__":
