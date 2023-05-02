@@ -5,7 +5,7 @@ from logic.sorting_dicts import sort_by_value_itemgetter, sort_dict_masses_lambd
 class Planet:
     name: str
     radius: int
-    mass: int
+    mass: tuple[int, int]
     dist_from_sun: int
     dist_from_earth: int
 
@@ -13,7 +13,7 @@ class Planet:
         self,
         name: str,
         radius: int,
-        mass: int,
+        mass: tuple[int, int],
         dist_from_sun: int,
         dist_from_earth: int,
     ):
@@ -27,38 +27,49 @@ class Planet:
     def __str__(self):
         return f"<class Planet: `{self.name}`>"
 
-    def give_trivia(self, earth_planet):
+    def give_trivia(self, ss):
+
+        planet_earth = ss.planets["Earth"]
 
         text = str()
 
         if self.name == "Earth":
-            formatted_radius_text = str()
+            formatted_text_radius = str()
+            formatted_text_mass = str()
 
         else:
 
             text_radius = "{} is a {} planet, with a radius of {} kilometers. It is a {} planet compared to Earth, approximately {} times the size of Earth, which is {} kilometers in radius."
+            text_mass = "Its mass is {}x10^{} which gives it the {}th place out of the {} planets (excluding the Sun)."
 
-            larger_than_earth = self.radius > earth_planet.radius
+            larger_than_earth = self.radius > planet_earth.radius
 
             if larger_than_earth:
                 size_comparison = "larger"
                 size_class = "large"
-                size_to_earth_ratio = round((earth_planet.radius / self.radius * 100), 2)
+                size_to_earth_ratio = round((planet_earth.radius / self.radius * 100), 2)
             else:
                 size_comparison = "smaller"
                 size_class = "small"
-                size_to_earth_ratio = round(self.radius / earth_planet.radius, 2)
+                size_to_earth_ratio = round(self.radius / planet_earth.radius, 2)
 
-            formatted_radius_text = text_radius.format(
+            formatted_text_radius = text_radius.format(
                 self.name.title(),
                 size_class,
                 self.radius,
                 size_comparison,
                 size_to_earth_ratio,
-                earth_planet.radius,
+                planet_earth.radius,
             )
 
-        return formatted_radius_text
+            formatted_text_mass = text_mass.format(
+                self.mass[0],
+                self.mass[1],
+                8 - list(ss.masses.keys()).index(self.name),
+                ss.number_of_planets
+            )
+
+        return formatted_text_radius + "\n" + formatted_text_mass
 
 
 class SolarSystem:

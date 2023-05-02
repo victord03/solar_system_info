@@ -56,3 +56,11 @@ planets = {
         "Distance from Earth": 4_621_600_000,  # in km
     },
 }
+
+Sol = {
+        "Name": "Sol",
+        "Radius": 696_340.0,  # in km
+        "Mass": (1.989, 30),  # in (kg, exp) where kg * 10**exp
+        "Distance from the Sun": 0.0,  # in km
+        "Distance from Earth": 150_770_000,  # in km
+    }
